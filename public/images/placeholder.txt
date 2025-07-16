@@ -1,0 +1,18 @@
+This folder contains placeholder images for the Spanish learning app.
+In a real implementation, you would add actual images here:
+
+- hola.png
+- buenos-dias.png
+- buenas-tardes.png
+- buenas-noches.png
+- uno.png, dos.png, tres.png, cuatro.png
+- rojo.png, azul.png, verde.png, amarillo.png
+- padre.png, madre.png, hijo.png, hija.png
+- morning.png, afternoon.png, night.png
+- red-apple.png, blue-sky.png, green-grass.png
+- cuatro-dots.png, dos-dots.png, tres-dots.png
+
+For demo purposes, you can use placeholder images from services like:
+- https://via.placeholder.com/200x200/ff0000/ffffff?text=Rojo
+- https://picsum.photos/200/200
+- Or create simple colored squares/illustrations

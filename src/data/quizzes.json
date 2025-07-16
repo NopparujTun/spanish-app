@@ -1,0 +1,122 @@
+[
+  {
+    "id": 1,
+    "title": "แบบทดสอบ: การทักทาย",
+    "description": "ทดสอบความรู้เรื่องการทักทายและแนะนำตัว",
+    "questions": [
+      {
+        "type": "multiple-choice",
+        "question": "คำว่า 'Hola' แปลว่าอะไร?",
+        "options": ["สวัสดี", "ลาก่อน", "ขอบคุณ", "ขอโทษ"],
+        "correct": 0,
+        "explanation": "Hola แปลว่า สวัสดี และสามารถใช้ได้ตลอดเวลา"
+      },
+      {
+        "type": "listening",
+        "question": "ฟังเสียงและเลือกคำทักทายที่ถูกต้อง",
+        "listeningAudio": "/audio/quiz-buenos-dias.mp3",
+        "options": ["Hola", "Buenos días", "Buenas tardes", "Buenas noches"],
+        "correct": 1,
+        "explanation": "Buenos días ใช้สำหรับทักทายตอนเช้า"
+      },
+      {
+        "type": "fill-blank",
+        "question": "เติมคำในช่องว่าง",
+        "sentence": "¡Hola! Me _____ María.",
+        "blankPosition": 11,
+        "correct": "llamo",
+        "explanation": "Me llamo หมายถึง ฉันชื่อ"
+      },
+      {
+        "type": "match-image",
+        "question": "เลือกภาพที่ตรงกับคำว่า 'Buenos días'",
+        "word": "Buenos días",
+        "images": [
+          { "src": "/images/morning.png", "alt": "Morning scene" },
+          { "src": "/images/afternoon.png", "alt": "Afternoon scene" },
+          { "src": "/images/night.png", "alt": "Night scene" }
+        ],
+        "correct": 0,
+        "explanation": "Buenos días ใช้ทักทายตอนเช้า"
+      },
+      {
+        "type": "sentence-order",
+        "question": "เรียงคำให้เป็นประโยคที่ถูกต้อง",
+        "words": ["Mucho", "gusto", "también"],
+        "correctOrder": ["Mucho", "gusto", "también"],
+        "explanation": "Mucho gusto también หมายถึง ยินดีที่ได้รู้จักเช่นกัน"
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "title": "แบบทดสอบ: ตัวเลขและสี",
+    "description": "ทดสอบความรู้เรื่องตัวเลขและสีต่างๆ",
+    "questions": [
+      {
+        "type": "multiple-choice",
+        "question": "ตัวเลข 'tres' คือเลขอะไร?",
+        "options": ["1", "2", "3", "4"],
+        "correct": 2,
+        "explanation": "tres แปลว่า สาม"
+      },
+      {
+        "type": "match-image",
+        "question": "เลือกภาพที่ตรงกับสี 'rojo'",
+        "word": "rojo",
+        "images": [
+          { "src": "/images/red-apple.png", "alt": "Red apple" },
+          { "src": "/images/blue-sky.png", "alt": "Blue sky" },
+          { "src": "/images/green-grass.png", "alt": "Green grass" }
+        ],
+        "correct": 0,
+        "explanation": "rojo แปลว่า สีแดง"
+      },
+      {
+        "type": "fill-blank",
+        "question": "เติมสีที่ถูกต้อง",
+        "sentence": "La hierba es _____",
+        "blankPosition": 15,
+        "correct": "verde",
+        "explanation": "หญ้าเป็นสีเขียว (verde)"
+      },
+      {
+        "type": "listening",
+        "question": "ฟังเสียงและเลือกตัวเลขที่ถูกต้อง",
+        "listeningAudio": "/audio/quiz-cuatro.mp3",
+        "options": ["dos", "tres", "cuatro", "cinco"],
+        "correct": 2,
+        "explanation": "cuatro แปลว่า สี่"
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "title": "แบบทดสอบ: ครอบครัว",
+    "description": "ทดสอบความรู้เรื่องสมาชิกในครอบครัว",
+    "questions": [
+      {
+        "type": "multiple-choice",
+        "question": "คำว่า 'madre' แปลว่าอะไร?",
+        "options": ["พ่อ", "แม่", "ลูกชาย", "ลูกสาว"],
+        "correct": 1,
+        "explanation": "madre แปลว่า แม่"
+      },
+      {
+        "type": "sentence-order",
+        "question": "เรียงคำให้เป็นประโยคที่ถูกต้อง",
+        "words": ["es", "Mi", "padre", "alto"],
+        "correctOrder": ["Mi", "padre", "es", "alto"],
+        "explanation": "Mi padre es alto หมายถึง พ่อของฉันสูง"
+      },
+      {
+        "type": "fill-blank",
+        "question": "เติมคำที่ถูกต้อง",
+        "sentence": "Ella es mi _____",
+        "blankPosition": 12,
+        "correct": "hija",
+        "explanation": "hija แปลว่า ลูกสาว"
+      }
+    ]
+  }
+]

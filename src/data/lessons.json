@@ -1,0 +1,254 @@
+[
+  {
+    "id": 1,
+    "title": "บทที่ 1: การทักทาย",
+    "description": "เรียนรู้การทักทายและแนะนำตัวเป็นภาษาสเปน",
+    "icon": "👋",
+    "sections": [
+      {
+        "type": "vocabulary",
+        "title": "คำศัพท์การทักทาย",
+        "words": [
+          {
+            "spanish": "Hola",
+            "thai": "สวัสดี",
+            "image": "/images/hola.png",
+            "audio": "/audio/hola.mp3"
+          },
+          {
+            "spanish": "Buenos días",
+            "thai": "สวัสดีตอนเช้า",
+            "image": "/images/buenos-dias.png",
+            "audio": "/audio/buenos-dias.mp3"
+          },
+          {
+            "spanish": "Buenas tardes",
+            "thai": "สวัสดีตอนบ่าย",
+            "image": "/images/buenas-tardes.png",
+            "audio": "/audio/buenas-tardes.mp3"
+          },
+          {
+            "spanish": "Buenas noches",
+            "thai": "สวัสดีตอนเย็น/ราตรีสวัสดิ์",
+            "image": "/images/buenas-noches.png",
+            "audio": "/audio/buenas-noches.mp3"
+          }
+        ]
+      },
+      {
+        "type": "grammar",
+        "title": "การใช้คำทักทาย",
+        "explanation": "ในภาษาสเปน เราใช้คำทักทายที่แตกต่างกันตามช่วงเวลา: Buenos días (เช้า), Buenas tardes (บ่าย), Buenas noches (เย็น/กลางคืน) และ Hola สามารถใช้ได้ตลอดเวลา",
+        "examples": [
+          {
+            "spanish": "¡Hola! ¿Cómo estás?",
+            "thai": "สวัสดี! เป็นอย่างไรบ้าง?",
+            "audio": "/audio/hola-como-estas.mp3"
+          },
+          {
+            "spanish": "Buenos días, señora",
+            "thai": "สวัสดีตอนเช้าครับ/ค่ะ คุนผู้หญิง",
+            "audio": "/audio/buenos-dias-senora.mp3"
+          }
+        ]
+      },
+      {
+        "type": "dialogue",
+        "title": "บทสนทนา: การพบกันครั้งแรก",
+        "messages": [
+          {
+            "speaker": "A",
+            "spanish": "¡Hola! Me llamo María.",
+            "thai": "สวัสดี! ฉันชื่อมาเรีย",
+            "audio": "/audio/dialogue-1-a.mp3"
+          },
+          {
+            "speaker": "B",
+            "spanish": "¡Hola María! Yo soy Carlos. Mucho gusto.",
+            "thai": "สวัสดีมาเรีย! ผมชื่อคาร์ลอส ยินดีที่ได้รู้จัก",
+            "audio": "/audio/dialogue-1-b.mp3"
+          },
+          {
+            "speaker": "A",
+            "spanish": "Mucho gusto también, Carlos.",
+            "thai": "ยินดีที่ได้รู้จักเช่นกันค่ะ คาร์ลอส",
+            "audio": "/audio/dialogue-1-c.mp3"
+          }
+        ]
+      },
+      {
+        "type": "practice",
+        "title": "ฝึกฝน: เลือกคำทักทายที่ถูกต้อง",
+        "activityType": "audio-choice",
+        "instruction": "ฟังเสียงและเลือกคำทักทายที่ถูกต้อง",
+        "audio": "/audio/practice-greeting.mp3",
+        "choices": ["Hola", "Adiós", "Gracias", "Por favor"],
+        "correctAnswer": 0
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "title": "บทที่ 2: ตัวเลขและสี",
+    "description": "เรียนรู้ตัวเลข 1-10 และสีต่างๆ เป็นภาษาสเปน",
+    "icon": "🔢",
+    "sections": [
+      {
+        "type": "vocabulary",
+        "title": "ตัวเลข 1-10",
+        "words": [
+          {
+            "spanish": "uno",
+            "thai": "หนึ่ง",
+            "image": "/images/uno.png",
+            "audio": "/audio/uno.mp3"
+          },
+          {
+            "spanish": "dos",
+            "thai": "สอง",
+            "image": "/images/dos.png",
+            "audio": "/audio/dos.mp3"
+          },
+          {
+            "spanish": "tres",
+            "thai": "สาม",
+            "image": "/images/tres.png",
+            "audio": "/audio/tres.mp3"
+          },
+          {
+            "spanish": "cuatro",
+            "thai": "สี่",
+            "image": "/images/cuatro.png",
+            "audio": "/audio/cuatro.mp3"
+          }
+        ]
+      },
+      {
+        "type": "vocabulary",
+        "title": "สีต่างๆ",
+        "words": [
+          {
+            "spanish": "rojo",
+            "thai": "สีแดง",
+            "image": "/images/rojo.png",
+            "audio": "/audio/rojo.mp3"
+          },
+          {
+            "spanish": "azul",
+            "thai": "สีน้ำเงิน",
+            "image": "/images/azul.png",
+            "audio": "/audio/azul.mp3"
+          },
+          {
+            "spanish": "verde",
+            "thai": "สีเขียว",
+            "image": "/images/verde.png",
+            "audio": "/audio/verde.mp3"
+          },
+          {
+            "spanish": "amarillo",
+            "thai": "สีเหลือง",
+            "image": "/images/amarillo.png",
+            "audio": "/audio/amarillo.mp3"
+          }
+        ]
+      },
+      {
+        "type": "practice",
+        "title": "ฝึกฝน: จับคู่ตัวเลขกับภาพ",
+        "activityType": "match-image",
+        "instruction": "จับคู่ตัวเลขภาษาสเปนกับภาพที่ถูกต้อง",
+        "words": [
+          { "spanish": "dos", "correctImage": 1 },
+          { "spanish": "tres", "correctImage": 2 },
+          { "spanish": "cuatro", "correctImage": 0 }
+        ],
+        "images": [
+          { "src": "/images/cuatro-dots.png", "alt": "Four dots" },
+          { "src": "/images/dos-dots.png", "alt": "Two dots" },
+          { "src": "/images/tres-dots.png", "alt": "Three dots" }
+        ]
+      },
+      {
+        "type": "practice",
+        "title": "ฝึกฝน: เติมคำในช่องว่าง",
+        "activityType": "fill-blank",
+        "instruction": "เติมสีที่ถูกต้องในประโยค",
+        "sentence": "El cielo es _____",
+        "blanks": [
+          { "position": 12, "answer": "azul" }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "title": "บทที่ 3: ครอบครัว",
+    "description": "เรียนรู้คำศัพท์เกี่ยวกับสมาชิกในครอบครัว",
+    "icon": "👨‍👩‍👧‍👦",
+    "sections": [
+      {
+        "type": "vocabulary",
+        "title": "สมาชิกในครอบครัว",
+        "words": [
+          {
+            "spanish": "padre",
+            "thai": "พ่อ",
+            "image": "/images/padre.png",
+            "audio": "/audio/padre.mp3"
+          },
+          {
+            "spanish": "madre",
+            "thai": "แม่",
+            "image": "/images/madre.png",
+            "audio": "/audio/madre.mp3"
+          },
+          {
+            "spanish": "hijo",
+            "thai": "ลูกชาย",
+            "image": "/images/hijo.png",
+            "audio": "/audio/hijo.mp3"
+          },
+          {
+            "spanish": "hija",
+            "thai": "ลูกสาว",
+            "image": "/images/hija.png",
+            "audio": "/audio/hija.mp3"
+          }
+        ]
+      },
+      {
+        "type": "dialogue",
+        "title": "บทสนทนา: แนะนำครอบครัว",
+        "messages": [
+          {
+            "speaker": "A",
+            "spanish": "Esta es mi familia.",
+            "thai": "นี่คือครอบครัวของฉัน",
+            "audio": "/audio/family-dialogue-1.mp3"
+          },
+          {
+            "speaker": "B",
+            "spanish": "¿Quién es él?",
+            "thai": "เขาคือใคร?",
+            "audio": "/audio/family-dialogue-2.mp3"
+          },
+          {
+            "speaker": "A",
+            "spanish": "Él es mi padre.",
+            "thai": "เขาคือพ่อของฉัน",
+            "audio": "/audio/family-dialogue-3.mp3"
+          }
+        ]
+      },
+      {
+        "type": "practice",
+        "title": "ฝึกฝน: เรียงประโยค",
+        "activityType": "sentence-order",
+        "instruction": "เรียงคำให้เป็นประโยคที่ถูกต้อง",
+        "words": ["Mi", "madre", "es", "muy", "bonita"],
+        "correctOrder": ["Mi", "madre", "es", "muy", "bonita"]
+      }
+    ]
+  }
+]
