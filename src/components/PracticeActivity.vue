@@ -284,7 +284,8 @@ export default {
     },
     
     playActivityAudio() {
-      this.playAudio(this.activity.audio)
+      // For practice activities, we'll use a generic Spanish phrase
+      this.playAudio('Escucha y elige la respuesta correcta', 'es-ES')
     }
   }
 }

@@ -154,9 +154,19 @@ export default {
     onPracticeComplete() {
       this.practiceCompleted = true
     },
-    playAudio(audioFile) {
+    playAudio(text) {
+      // Extract Spanish text from audio file path or use directly
+      let spanishText = text
+      
+      // If it looks like a file path, extract the Spanish text
+      if (typeof text === 'string' && text.includes('/')) {
+        // This is likely an audio file path, we need to get the Spanish text
+        // For now, we'll use the text as is, but in a real app you'd map file paths to text
+        spanishText = text.replace(/.*\//, '').replace(/\.(mp3|wav|ogg)$/, '').replace(/-/g, ' ')
+      }
+      
       // Use the injected playAudio method from parent
-      this.playAudio(audioFile)
+      this.$parent.playAudio(spanishText, 'es-ES')
     }
   }
 }

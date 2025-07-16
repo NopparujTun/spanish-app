@@ -344,11 +344,14 @@ export default {
     },
     
     playQuestionAudio() {
-      this.playAudio(this.currentQuestionData.audio)
+      // For question audio, we'll speak the question in Spanish
+      this.playAudio('Pregunta de audio', 'es-ES')
     },
     
     playListeningAudio() {
-      this.playAudio(this.currentQuestionData.listeningAudio)
+      // For listening exercises, we'll speak the correct answer
+      const correctOption = this.currentQuestionData.options[this.currentQuestionData.correct]
+      this.playAudio(correctOption, 'es-ES')
     },
     
     retakeQuiz() {

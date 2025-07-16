@@ -231,64 +231,72 @@ export default {
       }
     },
 
-    // Audio testing method
-    testAudio() {
-      this.playAudio('/audio/test.mp3')
-    },
-
-    // Global audio method that can be used by child components
-    playAudio(audioFile) {
-      this.lastAudioFile = audioFile
+    // Text-to-speech method for Spanish pronunciation
+    playAudio(text, lang = 'es-ES') {
+      this.lastAudioFile = text
       this.audioStatus = 'loading'
       
-      if (!audioFile) {
-        this.audioStatus = 'no file'
-        console.warn('No audio file provided')
+      if (!text) {
+        this.audioStatus = 'no text'
+        console.warn('No text provided for speech')
         return
       }
 
       try {
-        // Create a simple beep sound as fallback for missing audio files
-        if (audioFile.includes('placeholder') || !audioFile) {
+        // Check if speech synthesis is supported
+        if (!('speechSynthesis' in window)) {
+          this.audioStatus = 'not supported'
+          console.warn('Speech synthesis not supported')
           this.createBeepSound()
           return
         }
 
-        const audio = new Audio(audioFile)
-        
-        audio.addEventListener('loadstart', () => {
-          this.audioStatus = 'loading'
-        })
-        
-        audio.addEventListener('canplay', () => {
-          this.audioStatus = 'ready'
-        })
-        
-        audio.addEventListener('play', () => {
-          this.audioStatus = 'playing'
-        })
-        
-        audio.addEventListener('ended', () => {
-          this.audioStatus = 'ended'
-        })
-        
-        audio.addEventListener('error', (e) => {
-          this.audioStatus = 'error: ' + e.message
-          console.warn('Audio failed to load:', audioFile, e)
-          // Fallback to beep sound
-          this.createBeepSound()
-        })
+        // Stop any ongoing speech
+        window.speechSynthesis.cancel()
 
-        audio.play().catch(e => {
-          this.audioStatus = 'play error: ' + e.message
-          console.warn('Audio play failed:', audioFile, e)
-          // Fallback to beep sound
+        // Create speech utterance
+        const utterance = new SpeechSynthesisUtterance(text)
+        utterance.lang = lang
+        utterance.rate = 0.8 // Slightly slower for learning
+        utterance.pitch = 1.0
+        utterance.volume = 1.0
+
+        // Event listeners
+        utterance.onstart = () => {
+          this.audioStatus = 'speaking'
+        }
+
+        utterance.onend = () => {
+          this.audioStatus = 'finished'
+        }
+
+        utterance.onerror = (event) => {
+          this.audioStatus = 'speech error: ' + event.error
+          console.warn('Speech synthesis error:', event.error)
           this.createBeepSound()
-        })
+        }
+
+        // Try to get Spanish voice
+        const voices = window.speechSynthesis.getVoices()
+        const spanishVoice = voices.find(voice => 
+          voice.lang.startsWith('es') || 
+          voice.name.toLowerCase().includes('spanish') ||
+          voice.name.toLowerCase().includes('español')
+        )
+        
+        if (spanishVoice) {
+          utterance.voice = spanishVoice
+          this.audioStatus = `using voice: ${spanishVoice.name}`
+        } else {
+          this.audioStatus = 'using default voice'
+        }
+
+        // Speak the text
+        window.speechSynthesis.speak(utterance)
         
       } catch (error) {
-        this.audioStatus = 'catch error: ' + error.message
-        console.error('Audio error:', error)
+        this.audioStatus = 'error: ' + error.message
+        console.error('Speech synthesis error:', error)
         this.createBeepSound()
       }
     },
@@ -317,6 +325,11 @@ export default {
         this.audioStatus = 'beep failed'
         console.error('Beep sound failed:', error)
       }
+    },
+
+    // Test speech synthesis
+    testAudio() {
+      this.playAudio('Hola, ¿cómo estás?', 'es-ES')
     }
   },
 

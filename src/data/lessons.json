@@ -12,26 +12,22 @@
           {
             "spanish": "Hola",
             "thai": "สวัสดี",
-            "image": "/images/hola.png",
-            "audio": "/audio/hola.mp3"
+            "image": "/images/hola.png"
           },
           {
             "spanish": "Buenos días",
             "thai": "สวัสดีตอนเช้า",
-            "image": "/images/buenos-dias.png",
-            "audio": "/audio/buenos-dias.mp3"
+            "image": "/images/buenos-dias.png"
           },
           {
             "spanish": "Buenas tardes",
             "thai": "สวัสดีตอนบ่าย",
-            "image": "/images/buenas-tardes.png",
-            "audio": "/audio/buenas-tardes.mp3"
+            "image": "/images/buenas-tardes.png"
           },
           {
             "spanish": "Buenas noches",
             "thai": "สวัสดีตอนเย็น/ราตรีสวัสดิ์",
-            "image": "/images/buenas-noches.png",
-            "audio": "/audio/buenas-noches.mp3"
+            "image": "/images/buenas-noches.png"
           }
         ]
       },
@@ -42,13 +38,11 @@
         "examples": [
           {
             "spanish": "¡Hola! ¿Cómo estás?",
-            "thai": "สวัสดี! เป็นอย่างไรบ้าง?",
-            "audio": "/audio/hola-como-estas.mp3"
+            "thai": "สวัสดี! เป็นอย่างไรบ้าง?"
           },
           {
             "spanish": "Buenos días, señora",
-            "thai": "สวัสดีตอนเช้าครับ/ค่ะ คุนผู้หญิง",
-            "audio": "/audio/buenos-dias-senora.mp3"
+            "thai": "สวัสดีตอนเช้าครับ/ค่ะ คุนผู้หญิง"
           }
         ]
       },
@@ -59,20 +53,17 @@
           {
             "speaker": "A",
             "spanish": "¡Hola! Me llamo María.",
-            "thai": "สวัสดี! ฉันชื่อมาเรีย",
-            "audio": "/audio/dialogue-1-a.mp3"
+            "thai": "สวัสดี! ฉันชื่อมาเรีย"
           },
           {
             "speaker": "B",
             "spanish": "¡Hola María! Yo soy Carlos. Mucho gusto.",
-            "thai": "สวัสดีมาเรีย! ผมชื่อคาร์ลอส ยินดีที่ได้รู้จัก",
-            "audio": "/audio/dialogue-1-b.mp3"
+            "thai": "สวัสดีมาเรีย! ผมชื่อคาร์ลอส ยินดีที่ได้รู้จัก"
           },
           {
             "speaker": "A",
             "spanish": "Mucho gusto también, Carlos.",
-            "thai": "ยินดีที่ได้รู้จักเช่นกันค่ะ คาร์ลอส",
-            "audio": "/audio/dialogue-1-c.mp3"
+            "thai": "ยินดีที่ได้รู้จักเช่นกันค่ะ คาร์ลอส"
           }
         ]
       },
@@ -81,7 +72,6 @@
         "title": "ฝึกฝน: เลือกคำทักทายที่ถูกต้อง",
         "activityType": "audio-choice",
         "instruction": "ฟังเสียงและเลือกคำทักทายที่ถูกต้อง",
-        "audio": "/audio/practice-greeting.mp3",
         "choices": ["Hola", "Adiós", "Gracias", "Por favor"],
         "correctAnswer": 0
       }
@@ -100,26 +90,22 @@
           {
             "spanish": "uno",
             "thai": "หนึ่ง",
-            "image": "/images/uno.png",
-            "audio": "/audio/uno.mp3"
+            "image": "/images/uno.png"
           },
           {
             "spanish": "dos",
             "thai": "สอง",
-            "image": "/images/dos.png",
-            "audio": "/audio/dos.mp3"
+            "image": "/images/dos.png"
           },
           {
             "spanish": "tres",
             "thai": "สาม",
-            "image": "/images/tres.png",
-            "audio": "/audio/tres.mp3"
+            "image": "/images/tres.png"
           },
           {
             "spanish": "cuatro",
             "thai": "สี่",
-            "image": "/images/cuatro.png",
-            "audio": "/audio/cuatro.mp3"
+            "image": "/images/cuatro.png"
           }
         ]
       },
@@ -130,26 +116,22 @@
           {
             "spanish": "rojo",
             "thai": "สีแดง",
-            "image": "/images/rojo.png",
-            "audio": "/audio/rojo.mp3"
+            "image": "/images/rojo.png"
           },
           {
             "spanish": "azul",
             "thai": "สีน้ำเงิน",
-            "image": "/images/azul.png",
-            "audio": "/audio/azul.mp3"
+            "image": "/images/azul.png"
           },
           {
             "spanish": "verde",
             "thai": "สีเขียว",
-            "image": "/images/verde.png",
-            "audio": "/audio/verde.mp3"
+            "image": "/images/verde.png"
           },
           {
             "spanish": "amarillo",
             "thai": "สีเหลือง",
-            "image": "/images/amarillo.png",
-            "audio": "/audio/amarillo.mp3"
+            "image": "/images/amarillo.png"
           }
         ]
       },
@@ -194,26 +176,22 @@
           {
             "spanish": "padre",
             "thai": "พ่อ",
-            "image": "/images/padre.png",
-            "audio": "/audio/padre.mp3"
+            "image": "/images/padre.png"
           },
           {
             "spanish": "madre",
             "thai": "แม่",
-            "image": "/images/madre.png",
-            "audio": "/audio/madre.mp3"
+            "image": "/images/madre.png"
           },
           {
             "spanish": "hijo",
             "thai": "ลูกชาย",
-            "image": "/images/hijo.png",
-            "audio": "/audio/hijo.mp3"
+            "image": "/images/hijo.png"
           },
           {
             "spanish": "hija",
             "thai": "ลูกสาว",
-            "image": "/images/hija.png",
-            "audio": "/audio/hija.mp3"
+            "image": "/images/hija.png"
           }
         ]
       },
@@ -224,20 +202,17 @@
           {
             "speaker": "A",
             "spanish": "Esta es mi familia.",
-            "thai": "นี่คือครอบครัวของฉัน",
-            "audio": "/audio/family-dialogue-1.mp3"
+            "thai": "นี่คือครอบครัวของฉัน"
           },
           {
             "speaker": "B",
             "spanish": "¿Quién es él?",
-            "thai": "เขาคือใคร?",
-            "audio": "/audio/family-dialogue-2.mp3"
+            "thai": "เขาคือใคร?"
           },
           {
             "speaker": "A",
             "spanish": "Él es mi padre.",
-            "thai": "เขาคือพ่อของฉัน",
-            "audio": "/audio/family-dialogue-3.mp3"
+            "thai": "เขาคือพ่อของฉัน"
           }
         ]
       },
