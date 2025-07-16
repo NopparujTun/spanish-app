@@ -1,97 +1,114 @@
 <template>
   <div id="app">
     <header class="app-header">
-      <h1>🇪🇸 เรียนภาษาสเปน A1</h1>
-      <div class="progress-overview">
-        <span>ความคืบหน้า: {{ completedLessons }}/{{ totalLessons }} บทเรียน</span>
-        <div class="progress-bar">
-          <div class="progress-fill" :style="{ width: progressPercentage + '%' }"></div>
+      <div class="header-content">
+        <h1 class="app-title">
+          <span class="flag">🇪🇸</span>
+          เรียนภาษาสเปน A1
+          <span class="flag">🇹🇭</span>
+        </h1>
+        <div class="overall-progress">
+          <span>ความคืบหน้าทั้งหมด: {{ completedLessons }}/{{ lessons.length }}</span>
+          <div class="progress-bar">
+            <div class="progress-fill" :style="{ width: overallProgress + '%' }"></div>
+          </div>
         </div>
       </div>
     </header>
 
-    <nav class="main-nav">
-      <button 
-        @click="currentView = 'lessons'" 
-        :class="{ active: currentView === 'lessons' }"
-        class="nav-btn"
-      >
-        📚 บทเรียน
-      </button>
-      <button 
-        @click="currentView = 'quizzes'" 
-        :class="{ active: currentView === 'quizzes' }"
-        class="nav-btn"
-      >
-        🎯 แบบทดสอบ
-      </button>
-    </nav>
-
     <main class="main-content">
-      <!-- Lessons View -->
-      <div v-if="currentView === 'lessons'" class="lessons-view">
-        <div v-if="!selectedLesson" class="lessons-grid">
-          <div 
-            v-for="lesson in lessons" 
-            :key="lesson.id"
-            class="lesson-card"
-            :class="{ 
-              completed: isLessonCompleted(lesson.id),
-              locked: !isLessonUnlocked(lesson.id)
-            }"
-            @click="selectLesson(lesson)"
-          >
-            <div class="lesson-icon">{{ lesson.icon }}</div>
-            <h3>{{ lesson.title }}</h3>
-            <p>{{ lesson.description }}</p>
-            <div class="lesson-status">
-              <span v-if="isLessonCompleted(lesson.id)" class="status completed">✅ เสร็จแล้ว</span>
-              <span v-else-if="!isLessonUnlocked(lesson.id)" class="status locked">🔒 ล็อค</span>
-              <span v-else class="status available">▶️ เริ่มเรียน</span>
+      <div v-if="currentView === 'home'" class="home-view">
+        <div class="welcome-section">
+          <h2>ยินดีต้อนรับสู่การเรียนภาษาสเปน!</h2>
+          <p>เริ่มต้นการเรียนรู้ภาษาสเปนระดับ A1 ด้วยบทเรียนที่สนุกและมีปฏิสัมพันธ์</p>
+        </div>
+
+        <div class="content-grid">
+          <div class="lessons-section">
+            <h3>📚 บทเรียน</h3>
+            <div class="lessons-grid">
+              <div 
+                v-for="lesson in lessons" 
+                :key="lesson.id"
+                class="lesson-card"
+                :class="{ 
+                  locked: !isLessonUnlocked(lesson.id),
+                  completed: isLessonCompleted(lesson.id)
+                }"
+                @click="openLesson(lesson)"
+              >
+                <div class="lesson-icon">{{ lesson.icon }}</div>
+                <div class="lesson-content">
+                  <h4>{{ lesson.title }}</h4>
+                  <p>{{ lesson.description }}</p>
+                  <div class="lesson-status">
+                    <span v-if="isLessonCompleted(lesson.id)" class="status completed">✅ เสร็จสิ้น</span>
+                    <span v-else-if="isLessonUnlocked(lesson.id)" class="status available">📖 พร้อมเรียน</span>
+                    <span v-else class="status locked">🔒 ล็อค</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="quizzes-section">
+            <h3>📝 แบบทดสอบ</h3>
+            <div class="quizzes-grid">
+              <div 
+                v-for="quiz in quizzes" 
+                :key="quiz.id"
+                class="quiz-card"
+                :class="{ 
+                  locked: !isQuizUnlocked(quiz.id),
+                  completed: isQuizCompleted(quiz.id)
+                }"
+                @click="openQuiz(quiz)"
+              >
+                <div class="quiz-icon">📝</div>
+                <div class="quiz-content">
+                  <h4>{{ quiz.title }}</h4>
+                  <p>{{ quiz.description }}</p>
+                  <div class="quiz-status">
+                    <span v-if="isQuizCompleted(quiz.id)" class="status completed">✅ ผ่านแล้ว</span>
+                    <span v-else-if="isQuizUnlocked(quiz.id)" class="status available">📝 พร้อมทำ</span>
+                    <span v-else class="status locked">🔒 ล็อค</span>
+                  </div>
+                  <div v-if="getQuizScore(quiz.id)" class="quiz-score">
+                    คะแนน: {{ getQuizScore(quiz.id) }}%
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-
-        <LessonView 
-          v-if="selectedLesson" 
-          :lesson="selectedLesson"
-          @complete="completeLesson"
-          @back="selectedLesson = null"
-        />
       </div>
 
-      <!-- Quizzes View -->
-      <div v-if="currentView === 'quizzes'" class="quizzes-view">
-        <div v-if="!selectedQuiz" class="quizzes-grid">
-          <div 
-            v-for="quiz in quizzes" 
-            :key="quiz.id"
-            class="quiz-card"
-            :class="{ 
-              completed: isQuizCompleted(quiz.id),
-              locked: !isQuizUnlocked(quiz.id)
-            }"
-            @click="selectQuiz(quiz)"
-          >
-            <div class="quiz-icon">🎯</div>
-            <h3>{{ quiz.title }}</h3>
-            <p>{{ quiz.description }}</p>
-            <div class="quiz-status">
-              <span v-if="isQuizCompleted(quiz.id)" class="status completed">✅ เสร็จแล้ว</span>
-              <span v-else-if="!isQuizUnlocked(quiz.id)" class="status locked">🔒 ล็อค</span>
-              <span v-else class="status available">🎯 ทำแบบทดสอบ</span>
-            </div>
-          </div>
-        </div>
+      <LessonView 
+        v-if="currentView === 'lesson'" 
+        :lesson="currentLesson"
+        @back="goHome"
+        @complete="completeLesson"
+      />
 
-        <QuizView 
-          v-if="selectedQuiz" 
-          :quiz="selectedQuiz"
-          @complete="completeQuiz"
-          @back="selectedQuiz = null"
-        />
-      </div>
+      <QuizView 
+        v-if="currentView === 'quiz'" 
+        :quiz="currentQuiz"
+        @back="goHome"
+        @complete="completeQuiz"
+      />
     </main>
+
+    <footer class="app-footer">
+      <p>© 2025 Spanish Learning App - สำหรับผู้เรียนชาวไทย</p>
+    </footer>
+
+    <!-- Audio Debug Panel (for development) -->
+    <div v-if="showAudioDebug" class="audio-debug">
+      <h4>Audio Debug</h4>
+      <p>Last audio attempt: {{ lastAudioFile }}</p>
+      <p>Audio status: {{ audioStatus }}</p>
+      <button @click="testAudio">Test Audio</button>
+    </div>
   </div>
 </template>
 
@@ -109,74 +126,211 @@ export default {
   },
   data() {
     return {
-      currentView: 'lessons',
-      selectedLesson: null,
-      selectedQuiz: null,
+      currentView: 'home',
+      currentLesson: null,
+      currentQuiz: null,
       lessons: lessonsData,
       quizzes: quizzesData,
-      completedLessons: this.getCompletedLessons(),
-      completedQuizzes: this.getCompletedQuizzes()
+      completedLessons: [],
+      completedQuizzes: [],
+      quizScores: {},
+      showAudioDebug: false, // Set to true for debugging
+      lastAudioFile: '',
+      audioStatus: 'ready'
     }
   },
   computed: {
-    totalLessons() {
-      return this.lessons.length
-    },
-    progressPercentage() {
-      return (this.completedLessons.length / this.totalLessons) * 100
+    overallProgress() {
+      return (this.completedLessons.length / this.lessons.length) * 100
+    }
+  },
+  mounted() {
+    this.loadProgress()
+    // Enable audio debug in development
+    if (process.env.NODE_ENV === 'development') {
+      this.showAudioDebug = true
     }
   },
   methods: {
-    getCompletedLessons() {
-      const completed = localStorage.getItem('completedLessons')
-      return completed ? JSON.parse(completed) : []
+    openLesson(lesson) {
+      if (this.isLessonUnlocked(lesson.id)) {
+        this.currentLesson = lesson
+        this.currentView = 'lesson'
+      }
     },
-    getCompletedQuizzes() {
-      const completed = localStorage.getItem('completedQuizzes')
-      return completed ? JSON.parse(completed) : []
+    
+    openQuiz(quiz) {
+      if (this.isQuizUnlocked(quiz.id)) {
+        this.currentQuiz = quiz
+        this.currentView = 'quiz'
+      }
     },
-    isLessonCompleted(lessonId) {
-      return this.completedLessons.includes(lessonId)
+    
+    goHome() {
+      this.currentView = 'home'
+      this.currentLesson = null
+      this.currentQuiz = null
     },
+    
+    completeLesson(lessonId) {
+      if (!this.completedLessons.includes(lessonId)) {
+        this.completedLessons.push(lessonId)
+        this.saveProgress()
+      }
+      this.goHome()
+    },
+    
+    completeQuiz(quizId, score) {
+      if (!this.completedQuizzes.includes(quizId)) {
+        this.completedQuizzes.push(quizId)
+      }
+      if (score !== undefined) {
+        this.quizScores[quizId] = score
+      }
+      this.saveProgress()
+      this.goHome()
+    },
+    
     isLessonUnlocked(lessonId) {
       if (lessonId === 1) return true
       return this.completedLessons.includes(lessonId - 1)
     },
-    isQuizCompleted(quizId) {
-      return this.completedQuizzes.includes(quizId)
+    
+    isLessonCompleted(lessonId) {
+      return this.completedLessons.includes(lessonId)
     },
+    
     isQuizUnlocked(quizId) {
       return this.completedLessons.includes(quizId)
     },
-    selectLesson(lesson) {
-      if (this.isLessonUnlocked(lesson.id)) {
-        this.selectedLesson = lesson
+    
+    isQuizCompleted(quizId) {
+      return this.completedQuizzes.includes(quizId)
+    },
+    
+    getQuizScore(quizId) {
+      return this.quizScores[quizId]
+    },
+    
+    saveProgress() {
+      const progress = {
+        completedLessons: this.completedLessons,
+        completedQuizzes: this.completedQuizzes,
+        quizScores: this.quizScores
+      }
+      localStorage.setItem('spanishLearningProgress', JSON.stringify(progress))
+    },
+    
+    loadProgress() {
+      const saved = localStorage.getItem('spanishLearningProgress')
+      if (saved) {
+        const progress = JSON.parse(saved)
+        this.completedLessons = progress.completedLessons || []
+        this.completedQuizzes = progress.completedQuizzes || []
+        this.quizScores = progress.quizScores || {}
       }
     },
-    selectQuiz(quiz) {
-      if (this.isQuizUnlocked(quiz.id)) {
-        this.selectedQuiz = quiz
+
+    // Audio testing method
+    testAudio() {
+      this.playAudio('/audio/test.mp3')
+    },
+
+    // Global audio method that can be used by child components
+    playAudio(audioFile) {
+      this.lastAudioFile = audioFile
+      this.audioStatus = 'loading'
+      
+      if (!audioFile) {
+        this.audioStatus = 'no file'
+        console.warn('No audio file provided')
+        return
+      }
+
+      try {
+        // Create a simple beep sound as fallback for missing audio files
+        if (audioFile.includes('placeholder') || !audioFile) {
+          this.createBeepSound()
+          return
+        }
+
+        const audio = new Audio(audioFile)
+        
+        audio.addEventListener('loadstart', () => {
+          this.audioStatus = 'loading'
+        })
+        
+        audio.addEventListener('canplay', () => {
+          this.audioStatus = 'ready'
+        })
+        
+        audio.addEventListener('play', () => {
+          this.audioStatus = 'playing'
+        })
+        
+        audio.addEventListener('ended', () => {
+          this.audioStatus = 'ended'
+        })
+        
+        audio.addEventListener('error', (e) => {
+          this.audioStatus = 'error: ' + e.message
+          console.warn('Audio failed to load:', audioFile, e)
+          // Fallback to beep sound
+          this.createBeepSound()
+        })
+
+        audio.play().catch(e => {
+          this.audioStatus = 'play error: ' + e.message
+          console.warn('Audio play failed:', audioFile, e)
+          // Fallback to beep sound
+          this.createBeepSound()
+        })
+        
+      } catch (error) {
+        this.audioStatus = 'catch error: ' + error.message
+        console.error('Audio error:', error)
+        this.createBeepSound()
       }
     },
-    completeLesson(lessonId) {
-      if (!this.completedLessons.includes(lessonId)) {
-        this.completedLessons.push(lessonId)
-        localStorage.setItem('completedLessons', JSON.stringify(this.completedLessons))
+
+    // Create a simple beep sound as fallback
+    createBeepSound() {
+      try {
+        const audioContext = new (window.AudioContext || window.webkitAudioContext)()
+        const oscillator = audioContext.createOscillator()
+        const gainNode = audioContext.createGain()
+        
+        oscillator.connect(gainNode)
+        gainNode.connect(audioContext.destination)
+        
+        oscillator.frequency.value = 800
+        oscillator.type = 'sine'
+        
+        gainNode.gain.setValueAtTime(0.3, audioContext.currentTime)
+        gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.3)
+        
+        oscillator.start(audioContext.currentTime)
+        oscillator.stop(audioContext.currentTime + 0.3)
+        
+        this.audioStatus = 'beep played'
+      } catch (error) {
+        this.audioStatus = 'beep failed'
+        console.error('Beep sound failed:', error)
       }
-      this.selectedLesson = null
-    },
-    completeQuiz(quizId) {
-      if (!this.completedQuizzes.includes(quizId)) {
-        this.completedQuizzes.push(quizId)
-        localStorage.setItem('completedQuizzes', JSON.stringify(this.completedQuizzes))
-      }
-      this.selectedQuiz = null
+    }
+  },
+
+  // Provide audio method to child components
+  provide() {
+    return {
+      playAudio: this.playAudio
     }
   }
 }
 </script>
 
 <style>
+/* Reset and base styles */
 * {
   margin: 0;
   padding: 0;
@@ -185,9 +339,10 @@ export default {
 
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.6;
+  color: #2d3748;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   min-height: 100vh;
-  color: #333;
 }
 
 #app {
@@ -196,26 +351,47 @@ body {
   flex-direction: column;
 }
 
+/* Header */
 .app-header {
   background: rgba(255, 255, 255, 0.95);
-  padding: 1rem 2rem;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 1rem 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
 }
 
-.app-header h1 {
-  font-size: 2rem;
-  color: #4a5568;
-  margin-bottom: 1rem;
-  text-align: center;
+.header-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
 }
 
-.progress-overview {
+.app-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #2d3748;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.flag {
+  font-size: 1.5rem;
+}
+
+.overall-progress {
   display: flex;
   align-items: center;
   gap: 1rem;
-  justify-content: center;
-  flex-wrap: wrap;
+  font-weight: 600;
+  color: #4a5568;
 }
 
 .progress-bar {
@@ -232,109 +408,149 @@ body {
   transition: width 0.3s ease;
 }
 
-.main-nav {
-  display: flex;
-  justify-content: center;
-  gap: 1rem;
-  padding: 1rem;
-  background: rgba(255, 255, 255, 0.1);
-}
-
-.nav-btn {
-  padding: 0.75rem 1.5rem;
-  border: none;
-  border-radius: 25px;
-  background: rgba(255, 255, 255, 0.2);
-  color: white;
-  font-size: 1rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  backdrop-filter: blur(10px);
-}
-
-.nav-btn:hover {
-  background: rgba(255, 255, 255, 0.3);
-  transform: translateY(-2px);
-}
-
-.nav-btn.active {
-  background: rgba(255, 255, 255, 0.9);
-  color: #4a5568;
-}
-
+/* Main content */
 .main-content {
   flex: 1;
-  padding: 2rem;
   max-width: 1200px;
   margin: 0 auto;
+  padding: 2rem;
   width: 100%;
 }
 
-.lessons-grid, .quizzes-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 1.5rem;
+.home-view {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 20px;
+  padding: 2rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
 }
 
-.lesson-card, .quiz-card {
+.welcome-section {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.welcome-section h2 {
+  font-size: 2rem;
+  color: #2d3748;
+  margin-bottom: 1rem;
+}
+
+.welcome-section p {
+  font-size: 1.1rem;
+  color: #718096;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.content-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+}
+
+.lessons-section h3,
+.quizzes-section h3 {
+  font-size: 1.5rem;
+  color: #2d3748;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.lessons-grid,
+.quizzes-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Cards */
+.lesson-card,
+.quiz-card {
   background: white;
   border-radius: 15px;
   padding: 1.5rem;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
   cursor: pointer;
   transition: all 0.3s ease;
   border: 2px solid transparent;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
 }
 
-.lesson-card:hover, .quiz-card:hover {
-  transform: translateY(-5px);
+.lesson-card:hover,
+.quiz-card:hover {
+  transform: translateY(-2px);
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  border-color: #4299e1;
 }
 
-.lesson-card.completed, .quiz-card.completed {
-  border-color: #48bb78;
-  background: linear-gradient(135deg, #f0fff4, #c6f6d5);
-}
-
-.lesson-card.locked, .quiz-card.locked {
+.lesson-card.locked,
+.quiz-card.locked {
   opacity: 0.6;
   cursor: not-allowed;
   background: #f7fafc;
 }
 
-.lesson-card.locked:hover, .quiz-card.locked:hover {
+.lesson-card.locked:hover,
+.quiz-card.locked:hover {
   transform: none;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  border-color: transparent;
 }
 
-.lesson-icon, .quiz-icon {
+.lesson-card.completed {
+  border-color: #48bb78;
+  background: linear-gradient(135deg, #f0fff4 0%, #c6f6d5 100%);
+}
+
+.lesson-icon,
+.quiz-icon {
   font-size: 3rem;
-  text-align: center;
-  margin-bottom: 1rem;
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f7fafc;
+  border-radius: 15px;
+  flex-shrink: 0;
 }
 
-.lesson-card h3, .quiz-card h3 {
+.lesson-content,
+.quiz-content {
+  flex: 1;
+}
+
+.lesson-content h4,
+.quiz-content h4 {
   font-size: 1.25rem;
-  margin-bottom: 0.5rem;
   color: #2d3748;
+  margin-bottom: 0.5rem;
 }
 
-.lesson-card p, .quiz-card p {
+.lesson-content p,
+.quiz-content p {
   color: #718096;
   margin-bottom: 1rem;
   line-height: 1.5;
 }
 
-.lesson-status, .quiz-status {
-  text-align: center;
+.lesson-status,
+.quiz-status {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
 }
 
 .status {
-  padding: 0.5rem 1rem;
+  padding: 0.25rem 0.75rem;
   border-radius: 20px;
+  font-size: 0.875rem;
   font-weight: 600;
-  font-size: 0.9rem;
 }
 
 .status.completed {
@@ -342,42 +558,129 @@ body {
   color: #22543d;
 }
 
-.status.locked {
-  background: #e2e8f0;
-  color: #718096;
-}
-
 .status.available {
   background: #bee3f8;
   color: #2c5282;
 }
 
-@media (max-width: 768px) {
-  .app-header {
-    padding: 1rem;
-  }
+.status.locked {
+  background: #e2e8f0;
+  color: #718096;
+}
 
-  .app-header h1 {
-    font-size: 1.5rem;
-  }
+.quiz-score {
+  background: #fbb6ce;
+  color: #97266d;
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  display: inline-block;
+}
 
-  .progress-overview {
+/* Footer */
+.app-footer {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  text-align: center;
+  padding: 1rem;
+  color: white;
+  font-size: 0.875rem;
+}
+
+/* Audio Debug Panel */
+.audio-debug {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 1rem;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  z-index: 1000;
+  max-width: 300px;
+}
+
+.audio-debug h4 {
+  margin-bottom: 0.5rem;
+}
+
+.audio-debug p {
+  margin: 0.25rem 0;
+}
+
+.audio-debug button {
+  background: #4299e1;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 0.5rem;
+}
+
+/* Responsive design */
+@media (max-width: 1024px) {
+  .content-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  
+  .header-content {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .overall-progress {
     flex-direction: column;
     gap: 0.5rem;
   }
+}
 
+@media (max-width: 768px) {
   .main-content {
     padding: 1rem;
   }
-
-  .lessons-grid, .quizzes-grid {
-    grid-template-columns: 1fr;
-    gap: 1rem;
+  
+  .home-view {
+    padding: 1rem;
   }
+  
+  .lesson-card,
+  .quiz-card {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .lesson-icon,
+  .quiz-icon {
+    width: 60px;
+    height: 60px;
+    font-size: 2rem;
+  }
+  
+  .app-title {
+    font-size: 1.5rem;
+  }
+  
+  .progress-bar {
+    width: 150px;
+  }
+}
 
-  .nav-btn {
-    padding: 0.5rem 1rem;
-    font-size: 0.9rem;
+@media (max-width: 480px) {
+  .header-content {
+    padding: 0 1rem;
+  }
+  
+  .welcome-section h2 {
+    font-size: 1.5rem;
+  }
+  
+  .lesson-content h4,
+  .quiz-content h4 {
+    font-size: 1.1rem;
   }
 }
 </style>

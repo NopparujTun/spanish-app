@@ -120,6 +120,7 @@
 <script>
 export default {
   name: 'PracticeActivity',
+  inject: ['playAudio'],
   props: {
     activity: {
       type: Object,
@@ -283,10 +284,7 @@ export default {
     },
     
     playActivityAudio() {
-      if (this.activity.audio) {
-        const audio = new Audio(this.activity.audio)
-        audio.play().catch(e => console.log('Audio play failed:', e))
-      }
+      this.playAudio(this.activity.audio)
     }
   }
 }

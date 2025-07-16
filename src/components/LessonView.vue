@@ -114,6 +114,7 @@ export default {
   components: {
     PracticeActivity
   },
+  inject: ['playAudio'],
   props: {
     lesson: {
       type: Object,
@@ -154,10 +155,8 @@ export default {
       this.practiceCompleted = true
     },
     playAudio(audioFile) {
-      if (audioFile) {
-        const audio = new Audio(audioFile)
-        audio.play().catch(e => console.log('Audio play failed:', e))
-      }
+      // Use the injected playAudio method from parent
+      this.playAudio(audioFile)
     }
   }
 }

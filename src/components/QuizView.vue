@@ -181,6 +181,7 @@
 <script>
 export default {
   name: 'QuizView',
+  inject: ['playAudio'],
   props: {
     quiz: {
       type: Object,
@@ -343,17 +344,11 @@ export default {
     },
     
     playQuestionAudio() {
-      if (this.currentQuestionData.audio) {
-        const audio = new Audio(this.currentQuestionData.audio)
-        audio.play().catch(e => console.log('Audio play failed:', e))
-      }
+      this.playAudio(this.currentQuestionData.audio)
     },
     
     playListeningAudio() {
-      if (this.currentQuestionData.listeningAudio) {
-        const audio = new Audio(this.currentQuestionData.listeningAudio)
-        audio.play().catch(e => console.log('Audio play failed:', e))
-      }
+      this.playAudio(this.currentQuestionData.listeningAudio)
     },
     
     retakeQuiz() {
@@ -365,7 +360,8 @@ export default {
     },
     
     completeQuiz() {
-      this.$emit('complete', this.quiz.id)
+      const score = Math.round((this.correctAnswers / this.quiz.questions.length) * 100)
+      this.$emit('complete', this.quiz.id, score)
     }
   }
 }
